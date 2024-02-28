@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "473899416241",
+    "project_id": "knightmotion-8fa01",
+    "storage_bucket": "knightmotion-8fa01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473899416241:android:55a409aab6e4c9b4680090",
+        "android_client_info": {
+          "package_name": "com.example.knightmotion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvEt7DfMmkRbJdwPgHAYl76hCoGqa31n4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
