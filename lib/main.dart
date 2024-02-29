@@ -14,20 +14,22 @@ Future main() async {
     options: FirebaseOptions(
       apiKey: 'AIzaSyBvEt7DfMmkRbJdwPgHAYl76hCoGqa31n4',
       appId: '1:473899416241:android:55a409aab6e4c9b4680090',
-      messagingSenderId: 'YOUR_SENDER_ID', 
+      messagingSenderId: '473899416241', 
       projectId: 'knightmotion-8fa01',
+      storageBucket: 'gs://knightmotion-8fa01.appspot.com',
     ),
   );
+
 runApp(
     MultiProvider(
-      providers: [
-       ChangeNotifierProvider(create: (_) => Authenticate()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: MyApp(),
-      ),
-    ),
+  providers: [
+    ChangeNotifierProvider(create: (_) => Authenticate()),
+  ],
+  child: MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
+  ),
+)
   );
 }
 class MyApp extends StatelessWidget {
