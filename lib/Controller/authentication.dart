@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Authenticate extends ChangeNotifier {
@@ -39,6 +40,13 @@ class Authenticate extends ChangeNotifier {
     await prefs.setBool('adminLoggedIn', false);
     _userLoggedIn = false;
     _adminLoggedIn = false;
+     Fluttertoast.showToast(
+          msg: 'LogOut successful!',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+        );
     notifyListeners();
   }
 }

@@ -1,27 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:knightmotion/Controller/authentication.dart';
-import 'package:knightmotion/View/login.dart';
-import 'package:provider/provider.dart';
+import 'package:knightmotion/View/User/userDownloads.dart';
+import 'package:knightmotion/View/User/userHome.dart';
 
-class UserBottom extends StatelessWidget {
+class userBottom extends StatefulWidget {
+  @override
+  _userBottomState createState() => _userBottomState();
+}
+
+class _userBottomState extends State<userBottom> {
+  int _currentIndex = 0;
+
+  final List<Widget> _screens = [
+    userHome(),
+    userDownloads(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('User Panel'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: () {
-              Provider.of<Authenticate>(context, listen: false).logout();
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => Login()));
-            },
+      body: _screens[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            label: 'Templates',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.download_rounded),
+            label: 'Downloads',
           ),
         ],
-      ),
-      body: Center(
-        child: Text('Welcome User!'),
       ),
     );
   }

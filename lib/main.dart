@@ -2,11 +2,14 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:knightmotion/Controller/authentication.dart';
-import 'package:knightmotion/View/Admin/adminBottom.dart';
+import 'package:knightmotion/Controller/userHomeController.dart';
+import 'package:knightmotion/View/Admin/adminHome.dart';
 import 'package:knightmotion/View/User/userBottom.dart';
+import 'package:knightmotion/View/User/userHome.dart';
 import 'package:knightmotion/View/login.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:firebase_analytics/firebase_analytics.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,32 +22,42 @@ Future main() async {
       storageBucket: 'gs://knightmotion-8fa01.appspot.com',
     ),
   );
-
-runApp(
+ runApp(
     MultiProvider(
-  providers: [
-    ChangeNotifierProvider(create: (_) => Authenticate()),
-  ],
-  child: MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: MyApp(),
-  ),
-)
+      providers: [
+        ChangeNotifierProvider<EventController>(
+          create: (_) => EventController(),
+        ),
+        ChangeNotifierProvider<Authenticate>(
+          create: (_) => Authenticate(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MyApp(),
+      ),
+    ),
   );
 }
+
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-        title: 'Flutter Login App',
-        home: AnimatedSplashScreen(
-                duration: 3000,
-                splash: Image.asset('assets/logo.png'),
-                splashIconSize: 300,
-                nextScreen:SplashScreen(),
-              ),
-      );
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<EventController>(
+          create: (_) => EventController(),
+        ),
+        ChangeNotifierProvider<Authenticate>(
+          create: (_) => Authenticate(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+      ),
+    );
   }
 }
 
@@ -66,9 +79,9 @@ class SplashScreen extends StatelessWidget {
   void _navigateToCorrectScreen(BuildContext context) {
     final authProvider = Provider.of<Authenticate>(context, listen: false);
     if (authProvider.userLoggedIn) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserBottom()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => userBottom()));
     } else if (authProvider.adminLoggedIn) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => adminBottom()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => adminHome()));
     } else {
       // Navigate to login screen if neither user nor admin is logged in
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Login()));

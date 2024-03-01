@@ -129,7 +129,7 @@ class _adminHomeState extends State<adminHome> {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(
-        title: Text('Home'),
+        title: Text('Admin Home'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.logout),
@@ -209,7 +209,7 @@ class _adminHomeState extends State<adminHome> {
                           ),
                         ),
                 ),
-                SizedBox(height: 25),
+                SizedBox(height: 50),
                 ElevatedButton(
                   onPressed: _submitForm,
                   child: Text('Upload Template'),

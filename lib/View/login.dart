@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:knightmotion/Controller/authentication.dart';
-import 'package:knightmotion/View/Admin/adminBottom.dart';
+import 'package:knightmotion/View/Admin/adminHome.dart';
 import 'package:knightmotion/View/User/userBottom.dart';
+import 'package:knightmotion/View/User/userHome.dart';
 import 'package:knightmotion/View/User/userSignup.dart';
+import 'package:knightmotion/View/forgetPass.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
@@ -41,7 +43,7 @@ class _LoginState extends State<Login> {
         Provider.of<Authenticate>(context, listen: false).loginAsUser();
 
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => UserBottom()));
+            MaterialPageRoute(builder: (context) => userBottom()));
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           Fluttertoast.showToast(
@@ -96,7 +98,7 @@ class _LoginState extends State<Login> {
         );
          Provider.of<Authenticate>(context, listen: false).loginAsAdmin();
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => adminBottom()));
+            MaterialPageRoute(builder: (context) => adminHome()));
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           Fluttertoast.showToast(
@@ -330,13 +332,13 @@ class _LoginState extends State<Login> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) =>
-                                      //         ForgetPassword(),
-                                      //   ),
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ForgetPassword(),
+                                        ),
+                                      );
                                     },
                                     child: Text(
                                       'Forgot Password',
